@@ -1,0 +1,8 @@
+<strong>Add a comment:</strong>
+<%= form_with(model: [ @post, @post.comments.build ], local: true) do |post| %>
+  <p>
+    <%= post.text_field :body %>
+  </p>
+    <%= post.submit %>
+  </p>
+<% end %>
