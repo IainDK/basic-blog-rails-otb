@@ -1,25 +1,22 @@
 <p id="notice"><%= notice %></p>
 <div class="title">
   <% if @posts.empty? %>
-    <h1>Share what's on your mind. Go ahead and make a post.</h1>
+    <h2>Share what's on your mind. Go ahead and <%= link_to "make a post.", new_post_path %></h2>
   <% else %>
     <h1>All Posts</h1>
+    <%= link_to 'New Post', new_post_path %>
   <% end %>
 </div>
 <% @posts.each do |post| %>
   <div class="posts_border">
   <div class="blog_title">
-    <i> <%= post.title %> </i><br>
+    <i> <%= link_to post.title, post_path(post.id) %> </i><br>
+  </div>
+  <div class="date_and_time">
+    <%= post.created_at.strftime("%d %b %Y %H:%M") %>
   </div>
   <div class="blog_text">
     <%= post.body %><br>
   </div>
-  <div class="blog_edit">
-    <%= link_to 'Show', post %>
-    <%= link_to 'Edit', edit_post_path(post) %>
-    <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
-  </div>
 </div><br>
 <% end %>
-
-<%= link_to 'New Post', new_post_path %>

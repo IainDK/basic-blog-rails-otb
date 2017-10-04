@@ -1,4 +1,4 @@
-<strong>Add a comment:</strong>
+<strong>Did you enjoy this post? Then leave a comment below:</strong>
 <%= form_with(model: [ @post, @post.comments.build ], local: true) do |post| %>
   <p>
     <%= post.text_field :body %>
