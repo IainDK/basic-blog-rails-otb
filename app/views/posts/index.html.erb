@@ -9,14 +9,14 @@
 </div>
 <% @posts.each do |post| %>
   <div class="posts_border">
-  <div class="blog_title">
-    <i> <%= link_to post.title, post_path(post.id) %> </i><br>
-  </div>
-  <div class="date_and_time">
-    <%= post.created_at.strftime("%d %b %Y %H:%M") %>
-  </div>
-  <div class="blog_text">
-    <%= post.body %><br>
-  </div>
-</div><br>
+    <div class="blog_title">
+      <i> <%= link_to post.title, post_path(post.id) %> </i>
+    </div>
+    <div class="index_author">
+      Posted by <%= link_to post.user.name, post.user %> | <%= time_ago_in_words(post.created_at) %> Ago
+    </div>
+    <div class="blog_text">
+      <%= post.body %><br>
+    </div>
+  </div><br>
 <% end %>

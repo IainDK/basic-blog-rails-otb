@@ -10,7 +10,13 @@
 
   <body>
     <div class="return_home">
-      <%= link_to 'Home', '/' %>
+      <% if current_user %>
+        <%= link_to 'Home', '/' %> |
+        <%= link_to 'My Profile', current_user %> | 
+        <%= link_to "Log Out", logout_path, method: :delete %>
+      <% else %>
+        <%= link_to "Log In", '/login' %>
+      <% end %>
     </div>
     <%= yield %>
   </body>

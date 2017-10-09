@@ -1,10 +1,17 @@
 class PostsController < ApplicationController
+
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :require_permisson, only: [:edit, :update, :destroy]
+
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    unless current_user
+      redirect_to '\login'
+    else
+      @posts = Post.all
+    end
   end
 
   # GET /posts/1
@@ -24,8 +31,8 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
-
+    @user = current_user
+    @post = @user.posts.new(post_params)
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -62,6 +69,14 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def require_permisson
+    post = Post.find(params[:id])
+    unless current_user == post.user
+      flash[:notice] = "You do not have persmission to perform this action."
+      redirect_to posts_path
+    end
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])

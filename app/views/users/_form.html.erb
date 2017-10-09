@@ -1,0 +1,20 @@
+<div class="well">
+  <%= form_for(@user) do |f| %>
+  <%= render 'shared/error_messages', object: @user %>
+
+  <div class="form_break">
+    Name: <%= f.text_field :name, class: 'form-control' %> <br>
+  </div>
+  <div class="form_break">
+  Email: <%= f.email_field :email, class: 'form-control' %> <br>
+  </div>
+  <div class="form_break">
+  Password: <%= f.password_field :password, class: 'form-control' %> <br>
+  </div>
+
+  Password Confirmation: <%= f.password_field :password_confirmation, class: 'form-control' %> <br>
+  <div class="form_submit">
+    <%= f.submit %>
+  </div>
+<% end %>
+</div>
